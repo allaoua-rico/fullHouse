@@ -1,0 +1,14 @@
+GET http://localhost:4000/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvdWRyaW91IiwicGFzc3dvcmQiOiJib3VkMTE0MyIsImlhdCI6MTYzOTkxOTM0OH0.b68deb9pGe4lWPAfcskN0Xb3yrLSU_hyZeVCBEoD1SE
+
+
+###
+
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+    "username":"boudriou",
+    "password":"boud1143"
+
+}

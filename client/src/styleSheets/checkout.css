@@ -1,0 +1,11 @@
+.checkout_title{
+    margin-right: 10px;
+    padding: 0.625rem;
+    border-bottom: 1px solid lightgray;
+}
+.checkout{
+    background-color: white;
+    display: flex;
+    padding: 1.25rem;
+    justify-content: space-between;
+}
