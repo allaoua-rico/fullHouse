@@ -1,6 +1,6 @@
 const cloudinary = require('cloudinary');
-const dotenv=require('dotenv');
-dotenv.config();
+// const dotenv=require('dotenv');
+// dotenv.config();
 
 cloudinary.config({ 
     cloud_name: 'dwxiuhqh4', 
