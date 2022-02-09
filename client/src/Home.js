@@ -46,10 +46,13 @@ export default function Home() {
                     <div className="relative h-full flex flex-col justify-center items-center  ">
                         <img className="h-full w-full object-cover object-left	" src="home_cover2.webp" alt="" />
                         
-                        <p className="text-white font-semibold	bg-black/50  absolute mx-4 px-2 text-center rounded-3xl">
+                        <p className="bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 text-white font-semibold p-2	bg-zinc-700  absolute mx-4 px-2 text-center rounded-3xl">
                         <span className="text-pink-400 ">  Full House Deco : </span>
                         <br></br>
-                            Votre boutique en ligne 🛒 qui contient tout ce qui concerne la décoration intérieure 🏠, lingeries, et vaisselle ☕, selon vos goûts avec des prix abordables
+                        <p className='mt-3'>
+                        Votre boutique en ligne 🛒 qui contient tout ce qui concerne la décoration intérieure 🏠, lingeries, et vaisselle ☕, selon vos goûts avec des prix abordables
+
+                        </p>
                         </p>
                     </div>
                 </div >

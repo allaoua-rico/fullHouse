@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStateValue } from './stateProvider';
 import './styleSheets/login.css'
-
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 export default function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -81,7 +81,9 @@ export default function Login() {
     return (
         <div className="login flex flex-col  items-center justify-center h-screen">
          
-
+            <Link to={'/'} className='text-3xl mb-6 sm:inline' style={{fontFamily:['Patrick Hand']}}>
+                        Full House Deco
+            </Link>
             <div className="login_container">
                 <h1>Sign-In</h1>
                 <form action="">
@@ -95,7 +97,10 @@ export default function Login() {
                 </form>
 
             </div>
-
+         
+            <Link to={'/'} className='text-3xl mt-6 sm:inline' style={{fontFamily:['Patrick Hand']}}>
+                     <KeyboardBackspaceIcon/>   Go back
+            </Link>
         </div>
     )
 }

@@ -2,9 +2,41 @@ import React, { useEffect } from 'react'
 import { Link, Outlet } from "react-router-dom";
 import { useStateValue } from './stateProvider';
 import AddIcon from '@mui/icons-material/Add';
-import { Button } from '@mui/material';
+import { Box, Button, createTheme, IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 export default function Header() {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const theme = useTheme();
+
+    const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
+    const handleOpenNavMenu = (event) => {
+        // console.log(event.target)
+
+        setAnchorElNav(event.currentTarget);
+      };
+
+      // const handleOpenUserMenu = (event) => {
+        //   setAnchorElUser(event.currentTarget);
+      // };
+      const darkTheme = createTheme({
+        palette: {
+          mode: 'dark',
+        },
+      });
+    
+      const handleCloseNavMenu = () => { 
+        setAnchorElNav(null);
+      };
+    
+      const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+      };
+    
 
     const [{ user}, dispatch]= useStateValue();
     const handleSignOut = ()=>{
@@ -16,10 +48,14 @@ export default function Header() {
               })
         }        
     }
+    const menuItems=[
+        <Link to='/addProduct'>Add a product</Link>,
+        <button  onClick={handleSignOut}>Sign out</button>
+        ];
     return (
         <div className="relative flex flex-col ">
-            <div className="z-10 flex justify-around items-center h-20 bg-white bg-gradient-to-r from-rose-00 to-white border-b-yellow-800 border-b-2	fixed w-full top-0 left-0 ">
-                <div  className="h-16  p-1 m-2 flex items-center gap-x-4">
+            <div className="  z-10 flex justify-between items-center h-20 bg-white bg-gradient-to-r from-rose-00 to-white border-b-yellow-800 border-b-2	fixed w-full top-0 left-0 ">
+                <div  className="ml-7 h-16  p-1 m-2 flex items-center gap-x-4">
                     {/* <Link className="h-16  " to={`/`}>
                         <img className="object-cover h-full rounded-md ring-yellow-800 ring-1" src="logo.png"  />
                     </Link> */}
@@ -30,12 +66,72 @@ export default function Header() {
                 
                 {user!=='' && user?.token && (
                 <>
-                    <Link to='/addProduct'><Button variant='outlined' color='success' ><AddIcon/></Button></Link>
-                    <Link to={!user && '/login'}>
+                <Link to='/addProduct'><Button sx={{display:{xs:'none', sm:'flex'}}} variant='outlined' color='success' ><AddIcon/></Button></Link>
+                
+                <Box sx={{marginRight:'30px'}} >
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleOpenNavMenu}
+                    color="inherit"
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Menu
+                
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                    // pr:0,
+                    // background:'grey',
+                    // display: { xs: 'block', md: 'none' },
+                    // width:'100%'
+                    }}
+                    
+                >
+                    {menuItems.map((menuItem, index) => (
+    
+                    <MenuItem 
+                    sx={{ padding:3,display:{sm: ( 0===index ) && 'none'}, 
+                    background:menuItems.length-1===index && 'red',color:menuItems.length-1===index && 'white',
+                    '&:hover': {
+                        color: 'red',
+                        backgroundColor: 'white',
+                      }
+                }}
+                    key={index} 
+                    onClick={handleCloseNavMenu}
+                    divider={index!==menuItems.length-1 ? true:false}
+                    >
+                        <Typography textAlign="center">
+
+                                {menuItem}
+
+                        </Typography>
+                    </MenuItem>
+                    
+
+                    ))}
+                </Menu>
+                </Box>
+                    {/* <Link to={!user && '/login'}>
                         <Button color='error' variant='contained' onClick={handleSignOut} className="header__option">
                             <span className="header__optionLineTwo">Sign out</span>
                         </Button>
-                    </Link>
+                    </Link> */}
                 </>)}
             </div>
             <div  className="mt-20">
