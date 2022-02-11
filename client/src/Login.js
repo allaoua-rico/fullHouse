@@ -10,9 +10,7 @@ export default function Login() {
     const [username, setUsername] = useState('');
 
     const [{basket, user}, dispatch]= useStateValue();
-   
-  
-      
+
     
     function handleLogin(e){
         e.preventDefault();
@@ -30,19 +28,13 @@ export default function Login() {
         .then(res=> res.json())
         .then(data=>{
             if(data.message==="Success"){
-            // localStorage.setItem("token", JSON.stringify(data.token));
             dispatch({
             type:'SET_USER',
                 user: {
                     username: data.username,
                     token: data.token,
-                    // isAdmin: data.isAdmin ? true: false
                 }
             })
-            // localStorage.setItem("user", JSON.stringify(user));
-
-            // console.log(data)       
-            // data.message==="Success" && navigate('/') ;
             }
         })
     }
@@ -63,19 +55,11 @@ export default function Login() {
         .then(data=> console.log(data))
     }
     useEffect(() => {  
-        // console.log(user?.username!==null) 
         if(user?.username!==null && user?.username!==undefined){
             localStorage.setItem("storageUser", JSON.stringify(user));
             let saved=JSON.parse(localStorage.getItem("storageUser"));
-            // console.log(localStorage.getItem("storageUser"))   
-            // console.log(user)       
-
-            // data.message==="Success" && navigate('/') ;
-            // console.log(isStorageUserEmpty)
             saved.username!==null && saved.username!==undefined  && navigate('/');
-    
         }
-        
     },[user]);
 
     return (

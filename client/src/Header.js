@@ -2,12 +2,16 @@ import React, { useEffect } from 'react'
 import { Link, Outlet } from "react-router-dom";
 import { useStateValue } from './stateProvider';
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Button, createTheme, IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import { Box, Button, createTheme, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-
+import CartDrawer from './CartDrawer';
+// import ShoppingCartButton from './ShoppingCartButton'
+// import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 export default function Header() {
+    const [{basket, user}, dispatch]= useStateValue();
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const theme = useTheme();
@@ -15,8 +19,6 @@ export default function Header() {
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
     const handleOpenNavMenu = (event) => {
-        // console.log(event.target)
-
         setAnchorElNav(event.currentTarget);
       };
 
@@ -36,9 +38,6 @@ export default function Header() {
       const handleCloseUserMenu = () => {
         setAnchorElUser(null);
       };
-    
-
-    const [{ user}, dispatch]= useStateValue();
     const handleSignOut = ()=>{
         if(user){
             localStorage.removeItem("storageUser");
@@ -56,9 +55,6 @@ export default function Header() {
         <div className="relative flex flex-col ">
             <div className="  z-10 flex justify-between items-center h-20 bg-white bg-gradient-to-r from-rose-00 to-white border-b-yellow-800 border-b-2	fixed w-full top-0 left-0 ">
                 <div  className="ml-7 h-16  p-1 m-2 flex items-center gap-x-4">
-                    {/* <Link className="h-16  " to={`/`}>
-                        <img className="object-cover h-full rounded-md ring-yellow-800 ring-1" src="logo.png"  />
-                    </Link> */}
                     <Link to={'/'} className='text-3xl  sm:inline' style={{fontFamily:['Patrick Hand']}}>
                         Full House Deco
                     </Link>
@@ -133,6 +129,20 @@ export default function Header() {
                         </Button>
                     </Link> */}
                 </>)}
+                {/* <ShoppingCartButton/> */}
+                {/* {user===null && (
+                    <IconButton sx={{marginRight:'1rem'}} aria-label="delete" size="large">
+                        <Badge 
+                        badgeContent={basket?.length}
+                        color="error">
+                            <ShoppingCartIcon />
+                        </Badge>
+                    </IconButton>
+                )} */}
+                    
+
+            {user == null && <CartDrawer/> }
+
             </div>
             <div  className="mt-20">
                 <Outlet/>

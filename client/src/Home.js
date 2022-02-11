@@ -59,8 +59,8 @@ export default function Home() {
                 {!productsReturned ? 
                 <div className='w-full text-center text-3xl mt-6'>
                     
-                    <h2 className='mb-3'> Loading products </h2>
-                    <CircularProgress/>
+                    <h2 className='mb-3'> Chargement des produits </h2>
+                    <CircularProgress sx={{color:'#f472b6'}}/>
                 </div> :
 
                 <div className=' flex flex-col items-center'>

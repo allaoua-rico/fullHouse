@@ -1,24 +1,32 @@
 
-import { useMediaQuery } from '@mui/material';
+import { Tooltip, useMediaQuery} from '@mui/material';
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useStateValue } from './stateProvider';
 import { useTheme } from '@mui/material/styles';
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCartOutlined';
 // import './styleSheets/product.css'
-
+import { IconButton } from '@mui/material';
+import DescriptionIcon from '@mui/icons-material/Description';
 export default function Product({id,title, image, price, rating}) {
-    // const [{basket}, dispatch]= useStateValue();
-    // console.log(id)
-    // useEffect(() => {
-    //    fetch()
-    // }, []);
+    const [{basket}, dispatch]= useStateValue();
+    const addToBasket=  () => {
+        dispatch({
+          type:"ADD_TO_BASKET",
+          item:{
+              id:id,
+              title:title,
+              image:image,
+              price:price,
+            //   rating:rating
+          }
+      });
+  }
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
-    console.log(matches)
+    // console.log(matches)
     let styles={
-        // color: 'white',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'scroll',
         backgroundPosition: 'center',
@@ -27,11 +35,13 @@ export default function Product({id,title, image, price, rating}) {
         height: "400px",
         backgroundImage:`url("${image}")`,
         overflow:"hidden",
-        // filter: "blur(2px)"
-
     }
-   
-    // console.log(image)
+    useEffect(() => {  
+        const storageBasket=JSON.parse(localStorage.getItem("basket"));
+        if(storageBasket?.length < basket?.length){
+            localStorage.setItem("basket",JSON.stringify(basket));
+        }
+    },[basket]);
     return (
         <div 
         
@@ -44,7 +54,7 @@ export default function Product({id,title, image, price, rating}) {
             ">
                 <p className='sm:text-white text-2xl sm:text-4xl'>{title}</p>
 
-                <p className="text-pink-400 text-center sm:my-4 my-3 sm:text-base text-xl">
+                <p className="text-pink-400 text-center sm:my-4 my-3 sm:text-base text-2xl">
                     <strong>{price}</strong> 
                     <small> DA</small>
                 </p>
@@ -56,10 +66,28 @@ export default function Product({id,title, image, price, rating}) {
                 </div> */}
             </div>
 
-           
-            <Link className='transition duration-300 sm:translate-y-20	group-hover:translate-y-0'  to={`/details?id=${id}`}>
-                <button className="bg-orange-100 border border-solid border-orange-200  h-10 px-2">Détails</button>
+           <div className='flex justify-between gap-x-6 transition duration-300 sm:translate-y-20	group-hover:translate-y-0'>
+           <div className='bg-white w-9 h-9 rounded-full flex justify-center items-center transition duration-[450ms] hover:rotate-[360deg] hover:bg-pink-400 shoppingParent '>
+            <Link  to={`/details?id=${id}`}>
+                <IconButton disableRipple={true} aria-label="delete" size="sm" onClick={addToBasket}>
+                    <Tooltip title="Description">
+                        <DescriptionIcon  className='transition-all duration-[450ms]' sx={{color:'black','.shoppingParent:hover &': { color: 'white' }}}/>
+                    </Tooltip>
+                </IconButton>
             </Link>
+            </div>
+       
+            <div className='bg-white w-9 h-9 rounded-full flex justify-center items-center transition duration-[450ms] hover:rotate-[360deg] hover:bg-pink-400 shoppingParent '>
+                <IconButton disableRipple={true} aria-label="delete" size="sm" onClick={addToBasket}>
+                    <Tooltip title="Ajouter au pannier">
+                        <AddShoppingCartIcon className='transition-all duration-[450ms]' sx={{color:'black','.shoppingParent:hover &': { color: 'white' }}}/>
+                     </Tooltip>
+                </IconButton>
+            </div>
+            
+
+           </div>
+
             </div>
            
         </div>
