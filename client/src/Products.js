@@ -32,7 +32,7 @@ function Page ({ index }) {
     return (
         <>
         {!data ? <div>Loading</div> :
-            <div className=' flex flex-col items-center'>
+            <div className='w-screen flex flex-col items-center'>
                 <div className='text-3xl m-2 w-full text-center'>Produits</div>
                 <div 
                 className=" flex items-center flex-col md:flex-row flex-wrap mb-8 md:justify-center"

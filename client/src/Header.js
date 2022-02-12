@@ -145,7 +145,7 @@ export default function Header() {
 
             </div>
             <div  className="mt-20">
-                <Outlet/>
+                <Outlet />
             </div>
         </div>
     )

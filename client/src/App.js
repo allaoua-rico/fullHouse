@@ -68,7 +68,7 @@ useEffect(() => {
 }, []);
   return (
     <BrowserRouter>
-      <div className="text-stone-600 bg-white flex flex-col ">
+      <div className="text-stone-600 bg-white flex flex-col w-screen">
         
           <Routes>
             <Route  path="/login" element={<Login />} />

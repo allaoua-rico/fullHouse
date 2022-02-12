@@ -65,11 +65,11 @@ export default function Home() {
 
                 <div className=' flex flex-col items-center'>
                     <div className='text-5xl text-pink-400 m-2 w-full text-center my-10'>Produits</div>
-                    <div className="w-full flex items-center flex-col md:flex-row flex-wrap mb-8 md:justify-center">
+                    <div className=" flex items-center flex-col md:flex-row flex-wrap mb-8 md:justify-center ">
                         {productElementsArray?.map(product=>{
                             return (
                             <> 
-                            <div className="md:basis-1/2 max-w-md">
+                            <div className="md:basis-1/2 w-screen max-w-md ">
                                 {product}
                             </div>
                             <hr className='sm:hidden h-3 bg-pink-200 w-32 rounded-lg mb-8 mt-8 mx-auto'/>
