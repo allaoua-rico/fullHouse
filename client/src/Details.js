@@ -52,10 +52,11 @@ export default function Details() {
     //   console.log(product)
       
     return (
-        <div className="flex flex-col items-center w-full ">
-        <div className="w-11/12 py-8 relative flex flex-col items-center justify-center">
-            <div className="flex w-full justify-between absolute z-10">
+        <div className="flex flex-col md:flex-row  md:items-start items-center w-full px-4 ">
+        <div className="w-11/12 py-8 relative flex flex-col items-center justify-center basis-3/4">
+            <div className="flex w-full justify-between absolute">
                 <Button  
+                    sx={{zIndex:10}}
                     onClick={handleBack}
                     disabled={activeStep === 0}>
                     {theme.direction === 'rtl' ? (
@@ -66,11 +67,10 @@ export default function Details() {
                     
                 </Button>
                 <Button
-                    
+                    sx={{zIndex:10}}
                     onClick={handleNext}
                     disabled={activeStep === product?.imagesArray?.length - 1}
                 >
-                    
                     {theme.direction === 'rtl' ? (
                     <ArrowBackIosIcon />
                     ) : (
@@ -108,7 +108,7 @@ export default function Details() {
             </div>
          </div>
     
-            <div className="w-full p-8 flex flex-col gap-y-4">
+            <div className="w-full p-8 flex flex-col gap-y-4  md:mt-12 basis-1/4">
                 <h1 className="text-left text-4xl font-bold	font-sans">{product?.title}</h1>
                 {user?.token && (<Link to={`/update?id=${id}`}> <Button color='warning' variant="contained" className='w-40'>Update</Button></Link>)}
                 
@@ -116,7 +116,7 @@ export default function Details() {
                 {/* remove this line when finished */}
                 {/* <Link to={`/update?id=${id}`}> <Button color='warning' variant="contained" className='w-40'>Update</Button></Link> */}
                 <hr className="border border-black border-solid w-16" ></hr>
-                <h2 className="text-xl font-semibold italic">{product?.price} DA</h2>
+                <h2 className="text-pink-400 text-xl font-semibold italic">{product?.price} DA</h2>
             </div>
         
         </div>
