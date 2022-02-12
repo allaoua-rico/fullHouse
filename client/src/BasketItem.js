@@ -1,3 +1,4 @@
+import { dividerClasses } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useEffect } from 'react'
 import { useStateValue } from './stateProvider';
@@ -35,7 +36,7 @@ useEffect(() => {
                 />
               </div>
 
-              <div className="ml-4 flex-1 flex flex-col">
+              <div className="ml-4 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <h3>
@@ -45,7 +46,7 @@ useEffect(() => {
                   </div>
                   {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
                 </div>
-                <div className="flex-1 flex items-end justify-between ">
+                <div className="flex-1 flex items-center justify-between gap-x-3">
                     
                     <div className='flex justify-center items-center gap-x-4 '>
                         <Button style={{maxWidth: '35px', maxHeight: '35px', minWidth: '35px', minHeight: '35px'}} variant="outlined"  onClick={removeFromBasket}>-</Button>
@@ -54,10 +55,10 @@ useEffect(() => {
                     </div>
 
 
-                  <div className="flex">
-                    <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
+                  <div className="flex justify-center items-center ">
+                    <div className="font-medium text-indigo-600 hover:text-indigo-500">
                       {item.price*item.counter }DA
-                    </button>
+                    </div>
                   </div>
                 </div>
               </div>
