@@ -5,6 +5,7 @@ import config from './config';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import Footer from './Footer';
 
 export default function Home() {
     const [productsReturned, setProductsReturned]= useState()
@@ -85,6 +86,7 @@ export default function Home() {
                 </div>
                 
                 }
+                <Footer/>
             </div>
     )
 }
