@@ -1,12 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
-
 import Divider from '@mui/material/Divider';
-
 import ShoppingCartButton from './ShoppingCartButton'
-import { Link } from 'react-router-dom';
 import { useStateValue } from './stateProvider';
 import basketSorter from './basketSorter'
 import BasketItem from './BasketItem';
@@ -28,7 +24,6 @@ export default function CartDrawer() {
 
     setState({ ...state, [anchor]: open });
   };
-console.log(process.env.REACT_APP_ADDED_FEATURES)
   const list = (anchor) => (
     <Box
       sx={{   
@@ -36,7 +31,6 @@ console.log(process.env.REACT_APP_ADDED_FEATURES)
         padding:'1rem' 
       }}
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <h2 className="text-lg font-medium text-gray-900">Votre pannier</h2>
@@ -46,24 +40,14 @@ console.log(process.env.REACT_APP_ADDED_FEATURES)
       ))}
       </ul>
       <Divider />
-     { process.env.REACT_APP_ADDED_FEATURES && (
-        < Link to={'/checkout'} className='flex justify-center mt-4'>
-          <Button variant="contained" href="#contained-buttons" color={'warning'}>
-                  Aller au paiement
-          </Button>
-        </Link>
-          )
-}
-      {/* <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
+      <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+          <div className="flex justify-between text-base font-medium text-gray-900">
+            <p>Total:</p>
+            <p>{basket?.reduce((acc,{price})=>{
+                return acc+price
+            },0)} DA</p>
+          </div>
+        </div>
     </Box>
   );
 
@@ -72,7 +56,6 @@ console.log(process.env.REACT_APP_ADDED_FEATURES)
       
         <React.Fragment key={anchor}>
             <ShoppingCartButton onClick={toggleDrawer(anchor, true)}/>
-          {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}

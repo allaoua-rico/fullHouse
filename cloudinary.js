@@ -10,14 +10,16 @@ cloudinary.config({
   
 exports.uploads = (file, folder) => {
   return new Promise(resolve => {
+    // console.log(file)
     cloudinary.uploader.upload(file, (result) => {
-      resolve({
+       resolve({
         url: result.url,
         id: result.public_id
       })
     }, {
       resource_type: "auto",
-      folder: folder
+      folder: folder,
+      allowed_formats:['jpg','jpeg', 'png','webp']
     })
   })
 }

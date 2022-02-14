@@ -15,7 +15,7 @@ export default function basketSorter(basket){
       if(currentItem){
         basket.map((item,index)=>{
           //add 1 until a different title is matched
-          item.title==currentItem && count++;
+          item.title===currentItem && count++;
     
     
           if(item.title!==currentItem){

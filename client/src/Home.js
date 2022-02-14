@@ -58,14 +58,14 @@ export default function Home() {
                 </div >
                 {!productsReturned ? 
                 <div className='w-full text-center text-3xl mt-6'>
-                    
+                     
                     <h2 className='mb-3'> Chargement des produits </h2>
                     <CircularProgress sx={{color:'#f472b6'}}/>
                 </div> :
 
                 <div className=' flex flex-col items-center'>
                     <div className='text-5xl text-pink-400 m-2 w-full text-center my-10'>Produits</div>
-                    <div className=" flex items-center flex-col md:flex-row flex-wrap mb-8 md:justify-center ">
+                    <div className=" flex items-center flex-col gap-y-10 md:flex-row flex-wrap mb-8 md:justify-center ">
                         {productElementsArray?.map(product=>{
                             return (
                             <> 

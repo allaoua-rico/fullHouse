@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "devStart": "nodemon server.js ",
+    "devStart": "nodemon server.js --ignore client",
     "heroku-postbuild":"cd client && npm install && npm run build"
   },
   "keywords": [],

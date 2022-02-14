@@ -35,7 +35,7 @@ function Page ({ index }) {
             <div className='w-screen flex flex-col items-center'>
                 <div className='text-3xl m-2 w-full text-center'>Produits</div>
                 <div 
-                className=" flex items-center flex-col md:flex-row flex-wrap mb-8 md:justify-center"
+                className=" flex items-center gap-y-10 flex-col md:flex-row flex-wrap mb-8 md:justify-center"
                 >
                     {productElementsArray?.map(product=>{
                         return (

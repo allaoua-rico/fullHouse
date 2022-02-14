@@ -49,11 +49,11 @@ export default function Header() {
     }
     const menuItems=[
         <Link to='/addProduct'>Add a product</Link>,
-        <button  onClick={handleSignOut}>Sign out</button>
+        <button className='p-3'  onClick={handleSignOut}>Sign out</button>
         ];
     return (
         <div className="relative flex flex-col ">
-            <div className="  z-10 flex justify-between items-center h-20 bg-white bg-gradient-to-r from-rose-00 to-white border-b-yellow-800 border-b-2	fixed w-full top-0 left-0 ">
+            <div className="z-20 flex justify-between items-center h-20 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-90  border-b-yellow-800 border-b-[1px] fixed w-full top-0 left-0 ">
                 <div  className="ml-7 h-16  p-1 m-2 flex items-center gap-x-4">
                     <Link to={'/'} className='text-3xl  sm:inline' style={{fontFamily:['Patrick Hand']}}>
                         Full House Deco
@@ -99,9 +99,8 @@ export default function Header() {
                     
                 >
                     {menuItems.map((menuItem, index) => (
-    
                     <MenuItem 
-                    sx={{ padding:3,display:{sm: ( 0===index ) && 'none'}, 
+                    sx={{ display:{sm: ( 0===index ) && 'none'}, 
                     background:menuItems.length-1===index && 'red',color:menuItems.length-1===index && 'white',
                     '&:hover': {
                         color: 'red',
@@ -112,11 +111,11 @@ export default function Header() {
                     onClick={handleCloseNavMenu}
                     divider={index!==menuItems.length-1 ? true:false}
                     >
-                        <Typography textAlign="center">
+                        {/* <Typography textAlign="center"> */}
 
                                 {menuItem}
 
-                        </Typography>
+                        {/* </Typography> */}
                     </MenuItem>
                     
 
@@ -129,18 +128,6 @@ export default function Header() {
                         </Button>
                     </Link> */}
                 </>)}
-                {/* <ShoppingCartButton/> */}
-                {/* {user===null && (
-                    <IconButton sx={{marginRight:'1rem'}} aria-label="delete" size="large">
-                        <Badge 
-                        badgeContent={basket?.length}
-                        color="error">
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </IconButton>
-                )} */}
-                    
-
             {user == null && <CartDrawer/> }
 
             </div>
