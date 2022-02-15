@@ -31,6 +31,7 @@ export default function Update() {
     const [open, setOpen]= useState(false);
     const [product, setProduct]= useState();
     const [description, setDescription]= useState();
+    const [disabled, setDisabled]= useState(false);
 
     let navigate = useNavigate();
 
@@ -38,6 +39,7 @@ export default function Update() {
         display: 'none',
       });
     const removeProduct=()=>{
+        setDisabled(true)
             let form=document.getElementById('remove_form');
             let fd= new FormData(form);
             fd.append('id', id)
@@ -67,6 +69,7 @@ export default function Update() {
         }
     } 
     function handleSubmit(e){
+        setDisabled(true)
         e.preventDefault();
         const form = e.target;
         let formData = new FormData(form);
@@ -240,12 +243,12 @@ export default function Update() {
                 <br />
                     <div className="flex flex-col items-center ">
                         <form  onSubmit={e=>handleSubmit(e)}>
-                            <Button color='success' variant="contained" className='w-64' type='submit'>
+                            <Button disabled={disabled} color='success' variant="contained" className='w-64' type='submit'>
                                 Update changes
                             </Button>
                         </form>
                             <br />
-                        <Button color='error' variant="contained" className='w-64' onClick={e=>{setOpen(true)}}>
+                        <Button disabled={disabled} color='error' variant="contained" className='w-64' onClick={e=>{setOpen(true)}}>
                             Delete The Product
                         </Button>
 
