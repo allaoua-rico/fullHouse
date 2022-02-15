@@ -40,6 +40,11 @@ router.post('/',
     creatingProductFolder,
     upload.array('images'), 
     async (req,res)=>{
+    const dir = `uploads/${req.my_id}`;
+    //remove dir and files
+    fs.rmSync(dir, { recursive: true, force: true });
+    console.log('files of directory :' + dir+' removed');
+    
     const uploader = async (path) => await cloudinary.uploads(path,`fullhouse/${req.my_id}`);
     const imgUrlArray = [];
     for (var i = 0; i < req.files.length; i++) {imgUrlArray.push(req.files[i].path)}
