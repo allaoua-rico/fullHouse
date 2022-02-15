@@ -12,6 +12,8 @@ export default function Addproduct() {
     const [productReturned, setProductReturned]= useState();
     const [imagesArray, setImagesArray]= useState([]);
     const [filesArray, setFilesArray]= useState([]);
+    const [disabled, setDisabled]= useState(false);
+
     const navigate = useNavigate();
 
     const Input = styled('input')({
@@ -38,6 +40,7 @@ export default function Addproduct() {
         setImagesArray(  [...images] );
     }, [filesArray])
     function handleSubmit(e){
+        setDisabled(true);
         e.preventDefault();
         const form = e.target;
         let product= new FormData(form);
@@ -85,8 +88,12 @@ export default function Addproduct() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" name="title" required/>
                 </div>
                 <div className="w-full sm:w-1/2 px-3 mb-6  ">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">price</label>
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Price</label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" name="price" required/>
+                </div>
+                <div className="w-full sm:w-1/2 px-3 mb-6  ">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description</label>
+                    <textarea  className="min-h-[200px] ppearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  name="desc"/>
                 </div>
                 <div className="w-full sm:w-1/2 px-3 mb-6  ">
                     <label className=" uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mr-4">Image:</label>
@@ -97,7 +104,7 @@ export default function Addproduct() {
                         </IconButton>
                     </label>
                 </div>
-                <Button className='w-full sm:w-1/2 px-3 mb-6 ' variant="contained" type="submit" endIcon={<AddIcon />}>
+                <Button disabled={disabled} className='w-full sm:w-1/2 px-3 mb-6 ' variant="contained" type="submit" endIcon={<AddIcon />}>
                     Add The Product
                 </Button>
            </form>
@@ -109,7 +116,7 @@ export default function Addproduct() {
                 return (
                     <div className='flex flex-col md:px-5 my-16 md:basis-1/2 lg:basis-1/3 xl:basis-1/4' >
 <                       img src={image}></img>
-                        <Button key={index} color='error' variant="contained" onClick={(e)=> deleteImage(index)}>Delete </Button>
+                        <Button key={index} color='error' variant="contained"  onClick={(e)=> deleteImage(index)}>Delete </Button>
                     </div>
                 )
             })}

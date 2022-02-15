@@ -48,12 +48,16 @@ router.post('/',
         const newPath= await uploader(path);
         newArray.push(newPath.url)
     }
+    console.log(req.body)
     const product= new Product({
     _id : req.my_id,
     title: req.body.title,
     price:req.body.price,
-    imagesArray: newArray
+    imagesArray: newArray,
+    desc: req.body.desc
+    
 });
+
     product.save()
     .then(result => {
         let temp= result.toObject();

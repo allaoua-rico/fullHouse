@@ -27,6 +27,7 @@ const productSchema= new mongoose.Schema({
 }
 // ,{_id:false }
 );
+productSchema.add({ desc : 'string' });
 
 // productSchema.virtual('imagePath').get(function() {
 //     if (this.image != null ) {

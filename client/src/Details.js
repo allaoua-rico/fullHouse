@@ -116,7 +116,14 @@ export default function Details() {
                 {/* remove this line when finished */}
                 {/* <Link to={`/update?id=${id}`}> <Button color='warning' variant="contained" className='w-40'>Update</Button></Link> */}
                 <hr className="border border-black border-solid w-16" ></hr>
+
                 <h2 className="text-pink-400 text-xl font-semibold italic">{product?.price} DA</h2>
+                <div>
+                    <h3 className="sr-only">Description</h3>
+                    <div className="space-y-6">
+                        <p className="text-base text-gray-900">{product?.desc}</p>
+                    </div>
+                </div>
             </div>
         
         </div>

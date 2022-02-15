@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from './stateProvider';
 import { removeProduct,deleteImage, handleSubmit, handleInputChange } from './updateFunctions.js';
+import Description from '@mui/icons-material/Description';
 
 
 // import { Dialog } from '@mui/material';
@@ -29,7 +30,7 @@ export default function Update() {
     const [price, setPrice]= useState();
     const [open, setOpen]= useState(false);
     const [product, setProduct]= useState();
-    const [testArray, setTest]= useState();
+    const [description, setDescription]= useState();
 
     let navigate = useNavigate();
 
@@ -71,6 +72,7 @@ export default function Update() {
         let formData = new FormData(form);
         formData.append("title", document.getElementById('title').value)
         formData.append("price", document.getElementById('price').value)
+        formData.append("desc", document.getElementById('desc').value)
 
         for(let i =0; i < filesArray.length; i++) {
             formData.append("images", filesArray[i]);
@@ -125,6 +127,7 @@ export default function Update() {
             setPageImagesArray(product.imagesArray)
             setTitle(product.title)
             setPrice(product.price)
+            setDescription(product.description)
         }
     }, [product])
    
@@ -189,6 +192,12 @@ export default function Update() {
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" type="text" id="price" required value={price}
                             onChange={e=>setPrice(e.target.value)}/>
                         </div>
+                        <div className="w-full sm:w-1/2 px-3 mb-6  ">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description</label>
+                        <textarea  className="min-h-[200px] ppearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={description} id="desc" name="desc"
+                        onChange={e=>setDescription(e.target.value)}
+                        />
+                    </div>
                     </div>
                     <div>
                         <label className=" uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mr-4">Add An Image:</label>
