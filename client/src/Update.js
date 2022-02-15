@@ -130,7 +130,7 @@ export default function Update() {
             setPageImagesArray(product.imagesArray)
             setTitle(product.title)
             setPrice(product.price)
-            setDescription(product.description)
+            setDescription(product.desc)
         }
     }, [product])
    
