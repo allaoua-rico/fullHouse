@@ -119,7 +119,7 @@ export default function Details() {
 
                 <h2 className="text-pink-400 text-xl font-semibold italic">{product?.price} DA</h2>
                 <div>
-                    <h3 className="sr-only">Description</h3>
+                    <h3 className="text-xl font-bold mb-4">Description</h3>
                     <div className="space-y-6">
                         <p className="text-base text-gray-900">{product?.desc}</p>
                     </div>
