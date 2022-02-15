@@ -48,9 +48,9 @@ app.use('/api/remove', removeRouter);
 app.use('/api/products', productsRouter);
 
 //must be last , cause catch all routes
-// app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//   });
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
 const db= mongoose.connection;
 db.on('error', error=> console.error(error));

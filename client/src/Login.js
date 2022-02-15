@@ -42,7 +42,7 @@ export default function Login() {
         e.preventDefault();
         const user={
             email:email,
-            username:username,
+            // username:username,
             password:password
         };
         fetch("/api/register",{
