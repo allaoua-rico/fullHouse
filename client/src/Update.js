@@ -185,18 +185,18 @@ export default function Update() {
             <div className=" bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full sm:w-1/2 px-3 mb-6 md:mb-0 ">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Title</label>
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Title:</label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" id="title" required value={title}
                             onChange={e=>setTitle(e.target.value)}
                             />
                         </div>
                         <div className="w-full sm:w-1/2 px-3 mb-6 md:mb-0 ">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Price</label>
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Price:</label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" type="text" id="price" required value={price}
                             onChange={e=>setPrice(e.target.value)}/>
                         </div>
                         <div className="w-full sm:w-1/2 px-3 mb-6  ">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description</label>
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description:</label>
                         <textarea  className="min-h-[200px] ppearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={description} id="desc" name="desc"
                         onChange={e=>setDescription(e.target.value)}
                         />
