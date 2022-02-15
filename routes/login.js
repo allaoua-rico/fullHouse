@@ -13,13 +13,13 @@ router.post('/',async (req,res)=>{
         //created admin user doc with hashed password
         
         // const saltRounds = 10;
-        // const myPlaintextPassword = 'password';
+        // const myPlaintextPassword = 'full_house_31';
         // const someOtherPlaintextPassword = 'not_bacon';
 
         // bcrypt.hash(myPlaintextPassword, saltRounds,async  function(err, hash) {
         //     const admin= await new User({
-        //         email:'test@gmail.com',
-        //         username:'test',
+        //         email:'fullhouse@gmail.com',
+        //         username:'faida',
         //         password:hash
         //     })
         //     admin.save()
