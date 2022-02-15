@@ -23,7 +23,7 @@ const productsRouter = require("./routes/products.js");
 
 // app.use(bodyParser.urlencoded({ extended: false }))
 // app.use(bodyParser.json())
-app.use(cors());
+app.use(cors({origin:true}));
 app.use(express.json());
 
 // require('./passport');
