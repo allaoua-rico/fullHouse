@@ -52,7 +52,7 @@ router.post('/:id',
         cloudinary2.api.delete_resources_by_prefix(`fullhouse/${req.my_id}/`, function(result){});
 
         const uploader = async (path) => await cloudinary.uploads(path, `fullhouse/${req.my_id}/`);
-console.log(req.files)
+console.log('req.files')
     let id=req.my_id;
     const imgUrlArray = [];
     for (var i = 0; i < req.files.length; i++) {imgUrlArray.push(req.files[i].path)}
