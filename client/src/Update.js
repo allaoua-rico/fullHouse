@@ -80,7 +80,7 @@ export default function Update() {
         for(let i =0; i < filesArray.length; i++) {
             formData.append("images", filesArray[i]);
         }
-        console.log('here')
+        console.log(filesArray.length )
         if ( filesArray.length >0  ){ 
         fetch(`/api/update/${id}`,{
             method:'POST',
