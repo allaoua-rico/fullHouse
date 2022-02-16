@@ -7,7 +7,7 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.post('/',jsonParser, (req,res) =>{
-    console.log(req.body.url)
+    // console.log(req.body.url)
     // res.redirect(req.body.url)
     //request images and send them to front-end
     request({
@@ -16,7 +16,9 @@ router.post('/',jsonParser, (req,res) =>{
       }, 
       (err, resp, buffer) => {
         if (!err && resp.statusCode === 200){
-          res.set("Content-Type", "image/jpeg");
+        const contentType=resp.caseless.dict['content-type'] 
+        // console.log(contentType)
+          res.set("Content-Type", contentType);
           res.send(resp.body);
         }
       });
