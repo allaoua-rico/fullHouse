@@ -58,6 +58,8 @@
 
     "passport-local": "^1.0.0",
 
+    "request": "^2.88.2",
+
     "stripe": "^8.193.0"
 
   },

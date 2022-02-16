@@ -108,8 +108,11 @@ export default function Update() {
 
     useEffect(async () => {
         //the function that convert the images to files
-        const fetchImgs = async(imgUrl)=>{
-            let temp=await fetch(imgUrl)
+        const fetchImgs = async(imgUrl)=>{    
+            let temp=await fetch('/api/cors/',{
+                        method:'post',
+                        body: JSON.stringify({"url": imgUrl}),
+                        headers: {"Content-Type": "application/json"}})
             .then(res => res.blob())
             .then((blob) => {
                 i++

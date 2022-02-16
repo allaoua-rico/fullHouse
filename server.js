@@ -5,7 +5,6 @@ const express = require('express');
 const app = express();
 const cors= require('cors');
 const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const auth = require('./routes/auth');
@@ -19,10 +18,10 @@ const detailsRouter = require("./routes/details.js");
 const updateRouter = require("./routes/update.js");
 const removeRouter = require("./routes/remove.js");
 const productsRouter = require("./routes/products.js");
+const corsRouter = require("./routes/cors.js");
 
 
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(bodyParser.json())
+
 app.use(cors({origin:true}));
 app.use(express.json());
 
@@ -46,6 +45,7 @@ app.use('/api/details', detailsRouter);
 app.use('/api/update', updateRouter);
 app.use('/api/remove', removeRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/cors', corsRouter);
 
 //must be last , cause catch all routes
 app.get('*', function (req, res) {
