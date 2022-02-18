@@ -1,4 +1,6 @@
 const mongoose= require('mongoose');
+const ProductCategory = require('./product_category');
+
 
 const productSchema= new mongoose.Schema({
     // product_id:{
@@ -28,6 +30,34 @@ const productSchema= new mongoose.Schema({
 // ,{_id:false }
 );
 productSchema.add({ desc : 'string' });
+productSchema.add({ category_id : {type: mongoose.Schema.Types.ObjectId, ref: 'ProductCategory'} });
+        const Product = mongoose.model('Product', productSchema);
+
+(async()=>{
+//     await ProductCategory
+//     .find({name:"Literie"})
+//     .then((returned) => {
+//         // console.log(returned[0].id)
+
+//         const Product = mongoose.model('Product', productSchema);
+//         ProductCategory.find({name:"Literie"})
+//         const product = new Product({
+//         title:"title",
+//         price:100, 
+//         category_id:returned[0].id
+//         })
+//         product.save(function (err, doc) {
+//           console.log(doc);
+//           console.log(err);
+        
+//         }); 
+// })
+    await Product.find({title:"title"})
+    // .populate("category_id")
+    .then((returned)=>console.log(returned))
+})()
+
+
 
 // productSchema.virtual('imagePath').get(function() {
 //     if (this.image != null ) {

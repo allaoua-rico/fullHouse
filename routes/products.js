@@ -5,8 +5,9 @@ const fs = require('fs');
 const path = require('path');
 
 router.get('/',async (req,res)=>{
-    console.log('here')
+    // console.log('here')
     const page=req.query.page;
+    console.log(req.query)
     try {
         await Product
         .find({})
@@ -23,7 +24,7 @@ router.get('/',async (req,res)=>{
     } catch (error) {
         console.log(error)
     }
-    console.log(page)
+    // console.log(page)
 })
 
 module.exports= router;

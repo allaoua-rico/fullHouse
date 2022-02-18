@@ -45,7 +45,7 @@ export default function Product({id,title, image, price, rating}) {
     return (
         <div 
         
-        className="rounded-2xl  group overflow-hidden product flex flex-col items-center justify-between w-full  basis-1/2 "
+        className="rounded-2xl  group overflow-hidden product flex flex-col items-center justify-between w-full   "
          style={matches ? styles : {}}
         >
             <div className='hover:backdrop-blur-sm transition duration-200 w-full h-full flex flex-col p-5 items-center justify-between'>

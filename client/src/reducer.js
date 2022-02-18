@@ -1,7 +1,8 @@
 export const initialState={
     basket:[],
     user:null ,
-    length:0
+    length:0,
+    pageIndex:1
 };
 export const getBasketTotal=(basket)=>{
      return basket.reduce((accumulator, item) =>{
@@ -47,6 +48,11 @@ const reducer=(state, action)=>{
             length: action.length}
             ;
             break;
+        case 'SET_PAGE_INDEX':
+            return {...state,
+                pageIndex: action.pageIndex}
+                ;
+                break;
         default:
             return state;
             

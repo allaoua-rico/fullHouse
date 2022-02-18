@@ -10,14 +10,20 @@ import CartDrawer from './CartDrawer';
 // import ShoppingCartButton from './ShoppingCartButton'
 // import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 export default function Header() {
-    const [{basket, user}, dispatch]= useStateValue();
+    const [{pageIndex, user}, dispatch]= useStateValue();
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const theme = useTheme();
 
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
-
+    
+    function setPageIndex(index){
+        dispatch({
+            type:'SET_PAGE_INDEX',
+            pageIndex: index
+          })
+    }
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
       };
@@ -55,7 +61,10 @@ export default function Header() {
         <div className="relative flex flex-col ">
             <div className="z-20 flex justify-between items-center h-20 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-90  border-b-yellow-800 border-b-[1px] fixed w-full top-0 left-0 ">
                 <div  className="ml-7 h-16  p-1 m-2 flex items-center gap-x-4">
-                    <Link to={'/'} className='text-3xl  sm:inline' style={{fontFamily:['Patrick Hand']}}>
+                    <Link 
+                    onClick={()=>setPageIndex(1)} 
+                    to={'/'} 
+                    className='text-3xl  sm:inline' style={{fontFamily:['Patrick Hand']}}>
                         Full House Deco
                     </Link>
                 </div>

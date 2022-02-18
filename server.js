@@ -21,7 +21,6 @@ const productsRouter = require("./routes/products.js");
 const corsRouter = require("./routes/cors.js");
 
 
-
 app.use(cors({origin:true}));
 app.use(express.json());
 
