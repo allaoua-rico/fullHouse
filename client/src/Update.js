@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useStateValue } from './stateProvider';
 import { removeProduct,deleteImage, handleSubmit, handleInputChange } from './updateFunctions.js';
 import Description from '@mui/icons-material/Description';
-
+import MuiSelect from './components/MuiSelect'
 
 // import { Dialog } from '@mui/material';
 export default function Update() {
@@ -32,6 +32,8 @@ export default function Update() {
     const [product, setProduct]= useState();
     const [description, setDescription]= useState();
     const [disabled, setDisabled]= useState(false);
+    const [categories, setCategories]= useState();
+    const [selectedCat, setSelectedCat]= useState('');
 
     let navigate = useNavigate();
 
@@ -68,6 +70,7 @@ export default function Update() {
             setInputFiles([...temp])
         }
     } 
+
     function handleSubmit(e){
         setDisabled(true)
         e.preventDefault();
@@ -76,11 +79,11 @@ export default function Update() {
         formData.append("title", document.getElementById('title').value)
         formData.append("price", document.getElementById('price').value)
         formData.append("desc", document.getElementById('desc').value)
+        formData.append("cat", selectedCat)
 
         for(let i =0; i < filesArray.length; i++) {
             formData.append("images", filesArray[i]);
         }
-        console.log(filesArray.length )
         if ( filesArray.length >0  ){ 
         fetch(`/api/update/${id}`,{
             method:'POST',
@@ -141,9 +144,9 @@ export default function Update() {
     useEffect(() => {
         const fetchData = async (id) => {
             // const data =  await fetch(`${config.API_URI}/details/${id}`).then(res=>res.json());
-            const data =  await fetch(`/api/details/${id}`).then(res=>res.json());
-
-            setProduct(data);
+            const data =  await fetch(`/api/details/${id}?update=true`).then(res=>res.json());
+            setProduct(data.product);
+            setCategories(data.cat)
         };
         fetchData(id);
 
@@ -171,19 +174,6 @@ export default function Update() {
     useEffect(() => {
         // (user?.username===null || user?.username===undefined) && navigate('/');
     }, [user]);
-
-    // useEffect(() => {
-    //     let imagesArray=filesArray.map(file=>{
-    //         let src =URL.createObjectURL(file)
-    //          return src
-    //     })
-    //     setTest(imagesArray);
-    // }, [filesArray]);
-    // useEffect(() => {
-    //     console.log(testArray)
-
-    // }, [testArray]);
-    
     return (
         <div>
             <div className=" bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -200,11 +190,17 @@ export default function Update() {
                             onChange={e=>setPrice(e.target.value)}/>
                         </div>
                         <div className="w-full sm:w-1/2 px-3 mb-6  ">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description:</label>
-                        <textarea  className="min-h-[200px] ppearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={description} id="desc" name="desc"
-                        onChange={e=>setDescription(e.target.value)}
-                        />
-                    </div>
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description:</label>
+                            <textarea  className="min-h-[200px] ppearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={description} id="desc" name="desc"
+                            onChange={e=>setDescription(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <MuiSelect 
+                            id="category" 
+                            returnValue={cat=>setSelectedCat(cat)} 
+                            list={categories}/>
+                        </div>
                     </div>
                     <div>
                         <label className=" uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mr-4">Add An Image:</label>

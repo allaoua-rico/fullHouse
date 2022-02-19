@@ -31,9 +31,9 @@ const productSchema= new mongoose.Schema({
 );
 productSchema.add({ desc : 'string' });
 productSchema.add({ category_id : {type: mongoose.Schema.Types.ObjectId, ref: 'ProductCategory'} });
-        const Product = mongoose.model('Product', productSchema);
+        // const Product = mongoose.model('Product', productSchema);
 
-(async()=>{
+
 //     await ProductCategory
 //     .find({name:"Literie"})
 //     .then((returned) => {
@@ -52,10 +52,10 @@ productSchema.add({ category_id : {type: mongoose.Schema.Types.ObjectId, ref: 'P
         
 //         }); 
 // })
-    await Product.find({title:"title"})
-    // .populate("category_id")
-    .then((returned)=>console.log(returned))
-})()
+    // await Product.find({title:"title"})
+    // // .populate("category_id")
+    // .then((returned)=>console.log(returned))
+
 
 
 

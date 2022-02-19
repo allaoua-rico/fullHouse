@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const cloudinary = require("../cloudinary");
 const cloudinary2 = require('cloudinary');
+const ProductCategory = require('../models/product_category');
 
 // const { CloudinaryStorage } = require("multer-storage-cloudinary");
 require("../cloudinary");
@@ -52,7 +53,7 @@ router.post('/:id',
         cloudinary2.api.delete_resources_by_prefix(`fullhouse/${req.my_id}/`, function(result){});
 
         const uploader = async (path) => await cloudinary.uploads(path, `fullhouse/${req.my_id}/`);
-console.log('req.files')
+
     let id=req.my_id;
     const imgUrlArray = [];
     for (var i = 0; i < req.files.length; i++) {imgUrlArray.push(req.files[i].path)}
@@ -61,12 +62,18 @@ console.log('req.files')
         const newPath= await uploader(path);
         newArray.push(newPath.url)
     }
+    // console.log(req.body.cat)
+    const catId=await ProductCategory
+                        .findOne({name:req.body.cat},{_id:1})
+                        .catch(err=>console.log(err))
+                        console.log(catId)
     try{
         await Product.updateOne({_id:id},{$set:{
             title:req.body.title,
             price:req.body.price,
             imagesArray: newArray,
-            desc: req.body.desc
+            desc: req.body.desc,
+            category_id:catId.id
         }})
         await Product.findOne({_id:id}).then(resp=>res.json(resp))
         // res.json('Updated');

@@ -15,7 +15,7 @@ function Page ({ index }) {
     const fetcher = url => fetch(url).then(r => r.json())
     const { data } = useSWR(url, fetcher);
     const categories=[
-        {name:'tout',url:""},{name:'Literie',url:"literie"},
+        {name:'tout',url:""},{name:'Literie',url:"Literie"},
     ]
     let i=0 ;
     let productElementsArray=[];
