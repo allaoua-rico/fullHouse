@@ -30,6 +30,8 @@ require("../cloudinary");
         next();
     }
     function get_id(req,res,next){
+        console.log('4HI')
+
         req.my_id=req.params.id
         next(); 
     }
@@ -49,6 +51,7 @@ router.post('/:id',
     get_id,
     removeFiles,
     upload.array('images',10),
+
     async (req,res)=>{
         cloudinary2.api.delete_resources_by_prefix(`fullhouse/${req.my_id}/`, function(result){});
 
@@ -73,7 +76,7 @@ router.post('/:id',
             price:req.body.price,
             imagesArray: newArray,
             desc: req.body.desc,
-            category_id:catId.id
+            category_id:catId?.id
         }})
         await Product.findOne({_id:id}).then(resp=>res.json(resp))
         // res.json('Updated');
