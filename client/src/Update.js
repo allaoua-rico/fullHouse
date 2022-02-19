@@ -46,7 +46,6 @@ export default function Update() {
             let fd= new FormData(form);
             fd.append('id', id)
             // console.log(fd.get('id'))
-
             fetch('/api/remove',{
             method:"post",
             header:{
@@ -84,6 +83,8 @@ export default function Update() {
         for(let i =0; i < filesArray.length; i++) {
             formData.append("images", filesArray[i]);
         }
+        // console.log(user.token)
+
         if ( filesArray.length >0  ){ 
         fetch(`/api/update/${id}`,{
             method:'POST',
@@ -95,7 +96,7 @@ export default function Update() {
         .then(res=>res.json())
         .then(data=>{
             
-            // console.log(res)
+            console.log(data)
             if(data._id ) {navigate(`/details?id=${data._id}`)}
 
         })

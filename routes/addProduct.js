@@ -42,8 +42,8 @@ router.post('/',
     async (req,res)=>{
     const dir = `uploads/${req.my_id}`;
     //remove dir and files
-    fs.rmSync(dir, { recursive: true, force: true });
-    console.log('files of directory :' + dir+' removed');
+    // fs.rmSync(dir, { recursive: true, force: true });
+    // console.log('files of directory :' + dir+' removed');
     
     const uploader = async (path) => await cloudinary.uploads(path,`fullhouse/${req.my_id}`);
     const imgUrlArray = [];
@@ -81,6 +81,8 @@ router.post('/',
 
 })
 function verifyJWT(req, res, next){
+    console.log(req.headers['x-access-token'])
+
     const token= req.headers['x-access-token']?.split(' ')[1];
     if(token){
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{

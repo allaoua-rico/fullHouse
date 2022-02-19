@@ -55,6 +55,7 @@ export default function Login() {
         .then(data=> console.log(data))
     }
     useEffect(() => {  
+        console.log(user)
         if(user?.username!==null && user?.username!==undefined){
             localStorage.setItem("storageUser", JSON.stringify(user));
             let saved=JSON.parse(localStorage.getItem("storageUser"));

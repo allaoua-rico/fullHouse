@@ -48,6 +48,7 @@ require("../cloudinary");
     var upload = multer({storage: storage});
 
 router.post('/:id',
+    verifyJWT ,
     get_id,
     removeFiles,
     upload.array('images',10),
@@ -86,5 +87,23 @@ router.post('/:id',
     }
 
 })
+function verifyJWT(req, res, next){
+    console.log(req.headers['x-access-token'])
 
+    const token= req.headers['x-access-token']?.split(' ')[1];
+    if(token){
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{
+            if(err) return res.json({
+                isLoggedIn: false,
+                message:"Failed To Authenticate"
+            })
+            req.user={}
+            req.user.id=decoded.id
+            req.user.username=decoded.username
+            next()
+        })
+    }else{
+        res.json({message: "Incorrect Token Given", isLoggedIn: false});
+    }
+}
 module.exports= router;
