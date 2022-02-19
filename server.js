@@ -23,6 +23,7 @@ const corsRouter = require("./routes/cors.js");
 
 app.use(cors({origin:true}));
 app.use(express.json());
+// app.options('*', cors());
 
 // require('./passport');
 
@@ -30,7 +31,6 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
 
-  
 // Set EJS as templating engine 
 app.set("view engine", "ejs");
 

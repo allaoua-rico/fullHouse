@@ -89,6 +89,7 @@ export default function Update() {
         fetch(`/api/update/${id}`,{
             method:'POST',
             header:{
+                // 'Authorization' : 'Bearer ' + user.token,
                 "x-access-token": user.token,
             },
             body: formData

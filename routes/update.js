@@ -48,7 +48,7 @@ require("../cloudinary");
     var upload = multer({storage: storage});
 
 router.post('/:id',
-    verifyJWT ,
+    // verifyJWT ,
     get_id,
     removeFiles,
     upload.array('images',10),
@@ -88,7 +88,7 @@ router.post('/:id',
 
 })
 function verifyJWT(req, res, next){
-    console.log(req.headers['x-access-token'])
+    console.log(req.headers)
 
     const token= req.headers['x-access-token']?.split(' ')[1];
     if(token){
