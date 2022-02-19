@@ -83,13 +83,11 @@ export default function Update() {
         for(let i =0; i < filesArray.length; i++) {
             formData.append("images", filesArray[i]);
         }
-        // console.log(user.token)
 
         if ( filesArray.length >0  ){ 
         fetch(`/api/update/${id}`,{
             method:'POST',
-            header:{
-                // 'Authorization' : 'Bearer ' + user.token,
+            headers:{
                 "x-access-token": user.token,
             },
             body: formData

@@ -48,7 +48,7 @@ require("../cloudinary");
     var upload = multer({storage: storage});
 
 router.post('/:id',
-    // verifyJWT ,
+    verifyJWT ,
     get_id,
     removeFiles,
     upload.array('images',10),
