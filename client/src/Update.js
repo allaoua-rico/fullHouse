@@ -95,7 +95,7 @@ export default function Update() {
         .then(res=>res.json())
         .then(data=>{
             
-            console.log(data)
+            // console.log(data)
             if(data._id ) {navigate(`/details?id=${data._id}`)}
 
         })
@@ -145,6 +145,7 @@ export default function Update() {
         const fetchData = async (id) => {
             // const data =  await fetch(`${config.API_URI}/details/${id}`).then(res=>res.json());
             const data =  await fetch(`/api/details/${id}?update=true`).then(res=>res.json());
+            // console.log(data.product.category_id.name)
             setProduct(data.product);
             setCategories(data.cat)
         };
@@ -197,6 +198,7 @@ export default function Update() {
                         </div>
                         <div>
                             <MuiSelect 
+                            selected={product?.category_id.name}
                             id="category" 
                             returnValue={cat=>setSelectedCat(cat)} 
                             list={categories}/>

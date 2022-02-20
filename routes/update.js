@@ -77,7 +77,7 @@ router.post('/:id',
             price:req.body.price,
             imagesArray: newArray,
             desc: req.body.desc,
-            category_id:catId?.id
+            category_id:catId.id || ""
         }})
         await Product.findOne({_id:id}).then(resp=>res.json(resp))
         // res.json('Updated');
@@ -88,7 +88,7 @@ router.post('/:id',
 
 })
 function verifyJWT(req, res, next){
-    console.log(req.headers)
+    // console.log(req.headers)
 
     const token= req.headers['x-access-token']?.split(' ')[1];
     if(token){

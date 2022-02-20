@@ -10,24 +10,24 @@ import { useStateValue } from './stateProvider';
 
 export default function Home() {
     const [{ pageIndex}]= useStateValue();
-    const [productsReturned, setProductsReturned]= useState()
+    // const [productsReturned, setProductsReturned]= useState()
     const [hideHome, setHideHome]= useState(false)
 
-    let i=0 ;
-    let productElementsArray=[];
-    if(productsReturned){
-        productsReturned.map(productElement=>{
-            productElementsArray.push(
-                <Product 
-                id={productsReturned[i]._id}
-                title={productsReturned[i].title} 
-                price={productsReturned[i].price}
-                image={productsReturned[i].imagesArray[0]}
-                /> 
-            )
-            i++;
-        })
-    }
+    // let i=0 ;
+    // let productElementsArray=[];
+    // if(productsReturned){
+    //     productsReturned.map(productElement=>{
+    //         productElementsArray.push(
+    //             <Product 
+    //             id={productsReturned[i]._id}
+    //             title={productsReturned[i].title} 
+    //             price={productsReturned[i].price}
+    //             image={productsReturned[i].imagesArray[0]}
+    //             /> 
+    //         )
+    //         i++;
+    //     })
+    // }
     useEffect(() => {
         pageIndex ==1 ? setHideHome(false) : setHideHome(true)   
     }, [pageIndex])

@@ -3,30 +3,24 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useEffect,useState } from 'react';
 
-export default function SelectVariants({list,returnValue}) {
-  const [cat, setCat] = React.useState('');
+export default function MuiSelect({list,returnValue,selected}) {
+  const [cat, setCat] = useState('');
 
-  const handleChange = (event) => {
-    setCat(event.target.value);
-    
-  };
-React.useEffect(() => {
-  returnValue(cat)
-}, [cat])
-
+  useEffect(() => {returnValue(cat)}, [cat])
+  useEffect(() => {setCat(selected)}, [selected])
   return (
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Categorie</InputLabel>
+        <InputLabel id="MuiSelect-label">Categorie</InputLabel>
         <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
+          labelId="MuiSelect-label"
+          id="MuiSelect-standard"
           value={cat}
-          onChange={handleChange}
+          onChange={e=>setCat(e.target.value)}
           label="Category"
         >
-          <MenuItem className='h-10' value="">
-          </MenuItem>
+          <MenuItem className='h-10' value=""></MenuItem>
           {list?.map(item=>{
             return <MenuItem value={item.name}>{item.name}</MenuItem>
           })}

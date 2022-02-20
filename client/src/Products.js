@@ -8,15 +8,15 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 function Page ({ index }) {
     const [{}, dispatch]= useStateValue();
-    // const [data, setData]=useState([]);
+    const [categories, setCategories]=useState();
     const indexUrl=`/api/products?page=`;
 
     const [url, setUrl]= useState(indexUrl+1)
     const fetcher = url => fetch(url).then(r => r.json())
     const { data } = useSWR(url, fetcher);
-    const categories=[
-        {name:'tout',url:""},{name:'Literie',url:"Literie"},
-    ]
+    // const categories=[
+    //     {name:'tout',url:""},{name:'Literie',url:"Literie"},
+    // ]
     let i=0 ;
     let productElementsArray=[];
     
@@ -34,12 +34,25 @@ function Page ({ index }) {
         })
     }
     useEffect(() => { setUrl(indexUrl+index)}, [index]);
+    //toDo
+    // function setPageIndex(i){
+    //     dispatch({
+    //         type:'SET_LENGTH',
+    //         length: i
+    //     })
+    // }
     useEffect(() => {
+        // console.log(productElementsArray.length)
         productElementsArray.length > 1 && dispatch({
             type:'SET_LENGTH',
             length: productElementsArray.length
         })
     }, [productElementsArray.length]);
+    useEffect(() => { 
+        fetch('/api/getCategories')
+        .then(res=>res.json())
+        .then(data=>setCategories(data))
+    }, []);
 
     return (
         <>
@@ -50,10 +63,16 @@ function Page ({ index }) {
             </div> :
             <div className='w-screen flex flex-col items-center p-3'>
                 <div className='text-5xl text-pink-400 m-2 w-full text-center mb-4'>Produits</div>
-                <div>
-                    {categories.map(cat=>
+                <div
+                className='font-semibold text-lg mb-4'
+                >Filtrer selon la catégorie:</div>
+                <div className='flex gap-x-3 mb-4' >
+                    <button onClick={()=>{console.log(indexUrl+1);setUrl(indexUrl+1)}}>
+                        Tout
+                    </button>
+                    {categories?.map(cat=>
                     <button 
-                        onClick={()=>{console.log(indexUrl+1+'?cat='+cat.url);setUrl(indexUrl+1+'&cat='+cat.url)}}
+                        onClick={()=>{setUrl(indexUrl+1+'&cat='+cat.name)}}
                     >
                         {cat.name}
                     </button>)}

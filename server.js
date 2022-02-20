@@ -19,7 +19,8 @@ const updateRouter = require("./routes/update.js");
 const removeRouter = require("./routes/remove.js");
 const productsRouter = require("./routes/products.js");
 const corsRouter = require("./routes/cors.js");
-
+const getCategoriesRouter = require("./routes/getCategories.js");
+const ProductCategory = require('./models/product_category');
 
 app.use(cors({origin:true}));
 app.use(express.json());
@@ -45,6 +46,10 @@ app.use('/api/update', updateRouter);
 app.use('/api/remove', removeRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/cors', corsRouter);
+app.use('/api/getCategories', (req,res)=>{
+  ProductCategory.find({},{name:1,_id:0})
+                  .then(doc=>res.json(doc))
+      });
 
 //must be last , cause catch all routes
 app.get('*', function (req, res) {
