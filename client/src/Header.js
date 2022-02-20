@@ -62,13 +62,12 @@ export default function Header() {
             <div className="z-20 flex justify-between items-center h-20 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-90  border-b-yellow-800 border-b-[1px] fixed w-full top-0 left-0 ">
                 <div  className="ml-7 h-16  p-1 m-2 flex items-center gap-x-4">
                     <Link 
-                    onClick={()=>setPageIndex(1)} 
+                    onClick={()=>{setPageIndex(1);window.scrollTo({top: 0, left: 0,behavior: "smooth"})}} 
                     to={'/'} 
                     className='text-3xl  sm:inline' style={{fontFamily:['Patrick Hand']}}>
                         Full House Deco
                     </Link>
                 </div>
-                
                 {user!=='' && user?.token && (
                 <>
                 <Link to='/addProduct'><Button sx={{display:{xs:'none', sm:'flex'}}} variant='outlined' color='success' ><AddIcon/></Button></Link>

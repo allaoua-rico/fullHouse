@@ -30,7 +30,7 @@ require("../cloudinary");
         next();
     }
     function get_id(req,res,next){
-        console.log('4HI')
+        // console.log('4HI')
 
         req.my_id=req.params.id
         next(); 

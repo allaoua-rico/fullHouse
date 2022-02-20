@@ -11,7 +11,7 @@ router.get('/:id',async (req,res)=>{
     await Product.findOne({_id: req.params.id}, { __v:0})
     .populate('category_id',{name:1,_id:0})
     .then(async (product)=>{
-    console.log(product)
+    // console.log(product)
 
         let temp= product.toObject();
         if(req.query.update){

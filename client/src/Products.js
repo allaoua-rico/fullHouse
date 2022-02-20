@@ -9,17 +9,30 @@ import CircularProgress from '@mui/material/CircularProgress';
 function Page ({ index }) {
     const [{}, dispatch]= useStateValue();
     const [categories, setCategories]=useState();
-    const indexUrl=`/api/products?page=`;
+    const baseUrl=`/api/products?page=`;
 
-    const [url, setUrl]= useState(indexUrl+1)
+    const [url, setUrl]= useState(baseUrl+1)
     const fetcher = url => fetch(url).then(r => r.json())
     const { data } = useSWR(url, fetcher);
-    // const categories=[
-    //     {name:'tout',url:""},{name:'Literie',url:"Literie"},
-    // ]
+
     let i=0 ;
     let productElementsArray=[];
-    
+
+    function setUrlIndexAndCat(index,cat){
+        //fct that take params: index and cat and change only one of them or both
+
+        // const currentIndex= url.split('?page=')[1];
+        const currentCat= url.split('&cat=')[1] || " "
+        if(currentCat!==cat && cat!=="") { 
+            dispatch({
+                type:'SET_PAGE_INDEX',
+                pageIndex: 1
+              })
+            setUrl(baseUrl+index+'&cat='+cat)
+        }else{
+            setUrl(baseUrl+index+'&cat='+currentCat)
+        }
+    }
     if(data){
         data.map(productElement=>{
             productElementsArray.push(
@@ -33,21 +46,16 @@ function Page ({ index }) {
             i++;
         })
     }
-    useEffect(() => { setUrl(indexUrl+index)}, [index]);
-    //toDo
-    // function setPageIndex(i){
-    //     dispatch({
-    //         type:'SET_LENGTH',
-    //         length: i
-    //     })
-    // }
+
+    useEffect(() => {  setUrlIndexAndCat(index,'')}, [index]);
+
     useEffect(() => {
-        // console.log(productElementsArray.length)
-        productElementsArray.length > 1 && dispatch({
+        productElementsArray?.length && dispatch({
             type:'SET_LENGTH',
             length: productElementsArray.length
         })
     }, [productElementsArray.length]);
+
     useEffect(() => { 
         fetch('/api/getCategories')
         .then(res=>res.json())
@@ -67,19 +75,24 @@ function Page ({ index }) {
                 className='font-semibold text-lg mb-4'
                 >Filtrer selon la catégorie:</div>
                 <div className='flex gap-x-3 mb-4' >
-                    <button onClick={()=>{console.log(indexUrl+1);setUrl(indexUrl+1)}}>
+                    <button
+                    className='hover:text-pink-400'
+                    onClick={()=>{
+                        setUrlIndexAndCat(1,' ')
+                        }}>
                         Tout
                     </button>
                     {categories?.map(cat=>
                     <button 
-                        onClick={()=>{setUrl(indexUrl+1+'&cat='+cat.name)}}
+                        className='hover:text-pink-400'
+                        onClick={()=>{
+                            setUrlIndexAndCat(1,cat.name)
+                        }}
                     >
                         {cat.name}
                     </button>)}
                 </div>
-                <div 
-                className=" flex items-center gap-y-10 gap-x-1 flex-col md:flex-row flex-wrap mb-8 md:justify-center"
-                >
+                <div className=" flex items-center gap-y-10 gap-x-1 flex-col md:flex-row flex-wrap mb-8 md:justify-center">
                     {productElementsArray?.map(product=>{
                         return (
                         <div className="md:basis-1/2 max-w-md">
@@ -98,7 +111,6 @@ function Page ({ index }) {
   }
 
 export default function Products() {
-    // const [pageIndex, setPageIndex] = useState(parseInt(1));
     const [{length, pageIndex}, dispatch]= useStateValue();
 
     function setPageIndex(index){
@@ -107,14 +119,6 @@ export default function Products() {
             pageIndex: index
           })
     }
-    useEffect(() => {
-        // dispatch({
-        //     type:'SET_PAGE_INDEX',
-        //     index: pageIndex
-        //   })
-        // indexProvider(pageIndex);
-        // console.log(pageIndex)
-      }, [pageIndex]);
     return (
         <div  >
             <Page index={pageIndex}/>

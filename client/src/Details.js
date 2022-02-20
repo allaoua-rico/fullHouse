@@ -49,7 +49,7 @@ export default function Details() {
         }
       }
       
-    //   console.log(product)
+      console.log(product)
       
     return (
         <div className="flex flex-col md:flex-row  md:items-start items-center w-full px-4 ">
@@ -110,6 +110,9 @@ export default function Details() {
     
             <div className="w-full p-8 flex flex-col gap-y-4  md:mt-12 basis-1/4">
                 <h1 className="text-left text-4xl font-bold	font-sans">{product?.title}</h1>
+                {/* <div 
+                className='ml-3 text-xl font-light text-gray-700'
+                >{product?.category_id?.name}</div> */}
                 {user?.token && (<Link to={`/update?id=${id}`}> <Button color='warning' variant="contained" className='w-40'>Update</Button></Link>)}
                 
 
@@ -117,13 +120,13 @@ export default function Details() {
                 {/* <Link to={`/update?id=${id}`}> <Button color='warning' variant="contained" className='w-40'>Update</Button></Link> */}
                 <hr className="border border-black border-solid w-16" ></hr>
 
-                <h2 className="text-pink-400 text-xl font-semibold italic">{product?.price} DA</h2>
-                <div>
-                    <h3 className="text-xl font-bold mb-4">Description</h3>
+                <h2 className=" text-pink-400 text-xl font-semibold italic">{product?.price} DA</h2>
+                { product?.desc && <div>
+                    <h3 className="text-xl font-semibold mb-4">Details</h3>
                     <div className="space-y-6">
                         <p className="text-base text-gray-900">{product?.desc}</p>
                     </div>
-                </div>
+                </div>}
             </div>
         
         </div>

@@ -198,7 +198,7 @@ export default function Update() {
                         </div>
                         <div>
                             <MuiSelect 
-                            selected={product?.category_id.name}
+                            selected={product?.category_id?.name}
                             id="category" 
                             returnValue={cat=>setSelectedCat(cat)} 
                             list={categories}/>
