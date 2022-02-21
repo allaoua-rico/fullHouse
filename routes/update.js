@@ -10,31 +10,18 @@ const path = require('path');
 const cloudinary = require("../cloudinary");
 const cloudinary2 = require('cloudinary');
 const ProductCategory = require('../models/product_category');
-
-// const { CloudinaryStorage } = require("multer-storage-cloudinary");
 require("../cloudinary");
 
-    async function removeFiles(req, res,next){
+    async function creatingProductFolder (req, res,next){
         const dir = `uploads/${req.my_id}`;
-        //remove dir and files
-        fs.rmSync(dir, { recursive: true, force: true });
-        console.log('files of directory :' + dir+' removed');
-        
         __dirname=path.resolve()
-        await fs.mkdir(path.join(__dirname, `uploads/${req.my_id}`), (err) => {
-        if (err) {
-            return console.error(err);
-        }
+        await fs.mkdir(path.join(__dirname, dir), (err) => {
+        if (err) { console.error(err);}
         console.log(`uploads/${req.my_id}`+'Directory created successfully!');
     });
         next();
     }
-    function get_id(req,res,next){
-        // console.log('4HI')
-
-        req.my_id=req.params.id
-        next(); 
-    }
+    function get_id(req,res,next){req.my_id=req.params.id;next()}
     // Multer config
     var storage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -50,12 +37,10 @@ require("../cloudinary");
 router.post('/:id',
     verifyJWT ,
     get_id,
-    removeFiles,
+    creatingProductFolder,
     upload.array('images',10),
-
     async (req,res)=>{
         cloudinary2.api.delete_resources_by_prefix(`fullhouse/${req.my_id}/`, function(result){});
-
         const uploader = async (path) => await cloudinary.uploads(path, `fullhouse/${req.my_id}/`);
 
     let id=req.my_id;
@@ -66,7 +51,6 @@ router.post('/:id',
         const newPath= await uploader(path);
         newArray.push(newPath.url)
     }
-    // console.log(req.body.cat)
     const catId=await ProductCategory
                         .findOne({name:req.body.cat},{_id:1})
                         .catch(err=>console.log(err))
@@ -77,15 +61,19 @@ router.post('/:id',
             price:req.body.price,
             imagesArray: newArray,
             desc: req.body.desc,
-            category_id:catId.id || ""
+            category_id:catId?.id 
         }})
+        !catId && await Product.updateOne({_id:id},{$unset:{category_id:""}})
+        const dir = `uploads/${req.my_id}`;
+        //remove dir and files
+        fs.rmSync(dir, { recursive: true, force: true });
+        console.log('files of directory :' + dir+' removed');
+
         await Product.findOne({_id:id}).then(resp=>res.json(resp))
-        // res.json('Updated');
-        // res.send()
+ 
     }catch(err){
         console.log(err)
     }
-
 })
 function verifyJWT(req, res, next){
     // console.log(req.headers)

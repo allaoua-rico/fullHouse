@@ -41,9 +41,6 @@ router.post('/',
     upload.array('images'), 
     async (req,res)=>{
     const dir = `uploads/${req.my_id}`;
-    //remove dir and files
-    // fs.rmSync(dir, { recursive: true, force: true });
-    // console.log('files of directory :' + dir+' removed');
     
     const uploader = async (path) => await cloudinary.uploads(path,`fullhouse/${req.my_id}`);
     const imgUrlArray = [];
@@ -53,7 +50,6 @@ router.post('/',
         const newPath= await uploader(path);
         newArray.push(newPath.url)
     }
-    console.log(req.body)
     const product= new Product({
     _id : req.my_id,
     title: req.body.title,
@@ -71,6 +67,8 @@ router.post('/',
         const dir = `uploads/${req.my_id}`;
         //remove dir and files
         fs.rmSync(dir, { recursive: true, force: true });
+        console.log('files of directory :' + dir+' removed');
+
         res.json(temp)
     }).catch(err => {
         console.log(err),

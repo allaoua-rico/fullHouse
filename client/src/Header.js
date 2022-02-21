@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import CartDrawer from './CartDrawer';
-// import ShoppingCartButton from './ShoppingCartButton'
+import MuiSearch from './components/MuiSearch'
 // import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 export default function Header() {
     const [{pageIndex, user}, dispatch]= useStateValue();
@@ -67,6 +67,9 @@ export default function Header() {
                     className='text-3xl  sm:inline' style={{fontFamily:['Patrick Hand']}}>
                         Full House Deco
                     </Link>
+                </div>
+                <div>
+                {/* <MuiSearch/> */}
                 </div>
                 {user!=='' && user?.token && (
                 <>

@@ -48,8 +48,7 @@ export default function Details() {
           isError: error
         }
       }
-      
-      console.log(product)
+
       
     return (
         <div className="flex flex-col md:flex-row  md:items-start items-center w-full px-4 ">
